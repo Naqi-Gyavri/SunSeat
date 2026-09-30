@@ -4,7 +4,7 @@ SunSeat is a Python desktop application that recommends which side of a train to
 
 The application combines **GTFS timetable data**, **geographic route bearings**, and **solar-position calculations** to estimate whether sunlight is predominantly on the left or right side of the train.
 
-![SunSeat application demo](sunseat-demo.png)
+![SunSeat application demo](sunseat-demo.png) 
 
 ## What it does
 
