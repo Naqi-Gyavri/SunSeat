@@ -16,6 +16,16 @@ The application combines **GTFS timetable data**, **geographic route bearings**,
 - Cache GTFS data in memory to improve repeated searches.
 - Provide a desktop interface built with PySide6.
 
+## Key technologies
+
+- Python
+- PySide6
+- GTFS
+- Astral
+- Pytest
+- Geographic and solar-position calculations
+- In-memory caching for repeated GTFS searches
+
 ## Project structure
 
 ```text
@@ -23,6 +33,7 @@ SunSeat/
 ├── app.py                         # Application/service layer
 ├── gui.py                         # PySide6 desktop interface
 ├── engine/
+│   ├── __init__.py
 │   ├── geography.py               # Bearings and journey-level sun analysis
 │   ├── gtfs_reader.py             # GTFS loading, station and trip search
 │   ├── recommendation.py          # Seat-side recommendation logic
@@ -40,80 +51,3 @@ SunSeat/
 │       └── README.md              # Instructions for local GTFS data
 ├── requirements.txt
 └── README.md
-```
-
-## How the calculation works
-
-At a high level:
-
-1. The user selects an origin, destination, date, and departure time.
-2. SunSeat searches the GTFS data for a matching trip.
-3. The trip's ordered stops provide the route coordinates and segment times.
-4. A geographic bearing is calculated for each consecutive pair of stops.
-5. The sun's azimuth/elevation is calculated for each segment.
-6. The difference between train bearing and sun azimuth is classified as front, right, left, or back.
-7. Visible left/right exposure is aggregated.
-8. The recommendation engine determines the dominant side and confidence.
-
-GTFS times beyond `24:00:00` are handled explicitly because GTFS permits service times after midnight to remain associated with the service day.
-
-## Requirements
-
-- Python 3.x
-- PySide6
-- Astral
-- pytest (for tests)
-- A compatible GTFS dataset containing at least `stops.txt` and `stop_times.txt`
-
-## Setup
-
-Create a virtual environment if desired:
-
-```bash
-python -m venv .venv
-```
-
-Activate it on Windows:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Add your GTFS files here:
-
-```text
-SunSeat/data/DE-RV/stops.txt
-SunSeat/data/DE-RV/stop_times.txt
-```
-
-The GTFS files are not included in this repository.
-
-## Run
-
-Launch the desktop application with:
-
-```bash
-python gui.py
-```
-
-The underlying application/service layer can also be used directly through `app.py`.
-
-## Tests
-
-Run the test suite with:
-
-```bash
-python -m pytest
-```
-
-The GTFS-dependent tests require the local GTFS files described above.
-
-## Notes
-
-This repository contains the source code and tests for the SunSeat project. Local timetable datasets and generated build artifacts are intentionally excluded from version control.
