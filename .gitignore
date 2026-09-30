@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+*.spec
+build/
+dist/
+.DS_Store
+Thumbs.db
+
+# Local GTFS data
+/data/DE-RV/*.txt
+/data/RE-RB/*.txt
